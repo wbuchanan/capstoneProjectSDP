@@ -1,0 +1,216 @@
+Title:
+FCPS Educators use of the NWEA Data Portal:
+Two Level Model with Covariates and Two Estimated
+Between Subjects Latent Classes
+
+! The following variables were converted:
+! reqtime : System Timestamp
+! reportclass : Description of Report Accessed by User
+! reportcat : report_type_description
+! repo1 : Report Type = ASG_Class_Report
+! repo2 : Report Type = Admin Reports
+! repo3 : Report Type = Class_By_RIT
+! repo4 : Report Type = Class_Report
+! repo5 : Report Type = Class_by_Goal
+! repo6 : Report Type = Class_by_Projected_Proficiency
+! repo7 : Report Type = District_Summary
+! repo8 : Report Type = Grade_Report
+! repo9 : Report Type = MPG Reports
+! repo10 : Report Type = Projected_Proficiency_Summary
+! repo11 : Report Type = Student_Goal_Setting_Worksheet
+! repo12 : Report Type = Student_Growth_Summary
+! repo13 : Report Type = Student_Progress_Report
+! function : Job Function of User
+! emailmerge : Indicator from full outer join of usage and directory data
+! userid : User ID
+! date : Date
+! month : Month of Year (text)
+! hour : Hour of Day
+! minute : Minute of Hour
+! second : Second of Minute
+! weekday : Day of Week (text)
+! julday : Julian Calendar Day
+! weekyr : Week of Year
+! elapses : Seconds Elapsed within Session
+! elapsem : Minutes Elapsed within Session
+! elapseh : Hours Elapsed within Session
+! dayorder : Session Sequence ID
+! ovorder : Overall Sequence ID
+! daytotal : Total # of Reports for Day
+! ovtotal : Overall total # of Reports Viewed
+! totdays : Total Days with data viewed
+! report : report_type_description
+! 1: ASG_Class_Report
+! 2: Class_By_RIT
+! 3: Class_Report
+! 4: Class_by_Goal
+! 5: Class_by_Projected_Proficiency
+! 6: DesCartes_Query
+! 7: District_Summary
+! 8: Grade_Report
+! 9: MPG_Student
+! 10: MPG_Sub-Skill_Performance
+! 11: MPG_Teacher
+! 12: pgid
+! 13: Potential_Duplicate_Profiles
+! 14: Profiles_With_Shared_IDs
+! 15: Projected_Proficiency_Summary
+! 16: Student_Goal_Setting_Worksheet
+! 17: Student_Growth_Summary
+! 18: Student_Progress_Report
+! 19: Students_Without_Reporting_Attributes
+! 20: Students_Without_Valid_Test_Results
+! 21: Test_Events_By_Status
+! 22: User_Roles
+! username : User ID w/Email Address Labels
+! func1 : function==Unknown
+! func2 : function==Accounting/Clerical/Ops
+! func3 : function==Information Tech/Systems
+! func4 : function==District Administration/Central Office
+! func5 : function==School Administration
+! func6 : function==Special Ed/Ed Specialists
+! func7 : function==Classroom Educators
+! eseduc : Elementary School Educator
+! hseduc : High School Educator
+! mseduc : Middle School Educator
+! primkey : Primary Key for all Records in File
+! schid : School of Employment
+
+DATA:
+ FILE IS ~/Desktop/sdpmplus/data/sdpCapstoneData.dat ;
+
+VARIABLE:
+NAMES ARE reqtime reportcl reportca repo1 repo2 repo3 repo4 repo5 repo6 
+repo7 repo8 repo9 repo10 repo11 repo12 repo13 function emailmer userid 
+date month hour minute second weekday julday weekyr elapses elapsem 
+elapseh dayorder ovorder daytotal ovtotal totdays report username func1 
+func2 func3 func4 func5 func6 func7 eseduc hseduc mseduc primkey schid ; 
+
+MISSING ARE .;
+
+! Defines a single within subject latent class and a between subjects latent class
+CLASSES = UGROUPS(5) SESSION(2);
+
+! Defines the dummy variables as ordered categories
+CATEGORICAL ARE repo1 repo2 repo3 repo4 repo5 repo6 repo7 repo8 repo9 
+repo10 repo11 repo12 repo13;
+
+! Defines variables that vary within individuals
+WITHIN ARE repo1 repo2 repo3 repo4 repo5 repo6 repo7 repo8 repo9 repo10 
+repo11 repo12 repo13 SESSION;
+
+! Define Between level variables
+BETWEEN ARE UGROUPS totdays eseduc hseduc mseduc func5;
+
+! Defines the variable used to identify the clusters
+CLUSTER IS userid ;
+
+IDVARIABLE = primkey;
+
+AUXILIARY ARE reqtime reportcl reportca function emailmer 
+date month hour minute second weekday julday weekyr elapses elapsem 
+elapseh dayorder ovorder daytotal ovtotal report username func1 
+func2 func3 func4 func6 func7 schid ;
+
+! Defines the variables to be used in the analysis
+USEVARIABLES ARE repo1 repo2 repo3 repo4 repo5 repo6 repo7 repo8 repo9 repo10 repo11 
+repo12 repo13 totdays eseduc hseduc mseduc func5;
+
+USEOBSERVATIONS = emailmer NE 2;
+
+DEFINE:
+	STANDARDIZE totdays;
+
+! Define analytical parameters
+ANALYSIS:
+	TYPE = TWOLEVEL MIXTURE;
+!	STARTS = 50 10;
+!	STITERATIONS = 10;
+!	STCONVERGENCE = .001;
+	PROCESS=8(STARTS);
+	PROCESSORS = 8;
+!	MIXC = CONV;
+!	MIXU = CONV;
+!	LOGHIGH = 5;
+!	LOGLOW = -5;
+!	MCONVERGENCE = 1.0E-09;
+!	MCCONVERGENCE = 1.0E-08;
+!	MUCONVERGENCE = 1.0E-08;
+!	STSCALE = 1;
+	STSEED = 7779311;
+!	ESTIMATOR = MLR;
+!	ALGORITHM = EMA;
+!	UCELLSIZE = 0;
+!	INTEGRATION = STANDARD(50);
+!	LOGCRITERION = 1.0E-09;
+	
+! Define the model
+MODEL:
+	%WITHIN%
+	%OVERALL%
+    [ session#1@0.33079 ];
+
+     %BETWEEN%
+     %OVERALL%
+	UGROUPS ON totdays eseduc hseduc mseduc func5;
+     session#1 ON ugroups#1@2.55317;
+     session#1 ON ugroups#2@-1.22839;
+     session#1 ON ugroups#3@-3.61631;
+     session#1 ON ugroups#4@0.93835;
+     [ ugroups#1@0.49499 ];
+     [ ugroups#2@-0.60494 ];
+     [ ugroups#3@-1.27775 ];
+     [ ugroups#4@0.45201 ];
+
+  MODEL SESSION:
+     %WITHIN%
+     %SESSION#1%
+     [ repo1$1@1.71485 ] (1);
+     [ repo2$1@2.59546 ] (2);
+     [ repo3$1@1.94045 ] (3);
+     [ repo4$1@0.43297 ] (4);
+     [ repo5$1@2.69257 ] (5);
+     [ repo6$1@5.51446 ] (6);
+     [ repo7$1@6.34048 ] (7);
+     [ repo8$1@2.39500 ] (8);
+     [ repo9$1@5.82383 ] (9);
+     [ repo10$1@6.05806 ] (10);
+     [ repo11$1@2.26533 ] (11);
+     [ repo12$1@4.96066 ] (12);
+     [ repo13$1@15 ] (13);
+
+     %SESSION#2%
+     [ repo1$1@15 ] (14);
+     [ repo2$1@15 ] (15);
+     [ repo3$1@15 ] (16);
+     [ repo4$1@15 ] (17);
+     [ repo5$1@15 ] (18);
+     [ repo6$1@15 ] (19);
+     [ repo7$1@15 ] (20);
+     [ repo8$1@15 ] (21);
+     [ repo9$1@15 ] (22);
+     [ repo10$1@15 ] (23);
+     [ repo11$1@15 ] (24);
+     [ repo12$1@15 ] (25);
+     [ repo13$1@-15 ] (26);
+	
+! Define what output/results will be saved
+SAVEDATA: 
+	FILE IS ~/Desktop/sdpmplus/output/usersonly/twolevel/classes2/cv/data.dat;
+	SAMPLE IS ~/Desktop/sdpmplus/output/usersonly/twolevel/classes2/cv/sample.dat;
+	RESULTS ARE ~/Desktop/sdpmplus/output/usersonly/twolevel/classes2/cv/results.dat;
+	TECH3 IS ~/Desktop/sdpmplus/output/usersonly/twolevel/classes2/cv/tech3.dat;
+	TECH4 IS ~/Desktop/sdpmplus/output/usersonly/twolevel/classes2/cv/tech4.dat;
+	SAVE IS CPROB; 
+	SAVE = LOGLIKELIHOOD;
+	FORMAT IS FREE;
+
+! Define output to be saved
+OUTPUT:
+	TECH14; RESIDUAL; CINTERVAL; SVALUES; 
+	TECH1; TECH2; TECH3; TECH4; TECH5;
+	TECH7; TECH8; TECH12; TECH15; 
+
+PLOT:
+	TYPE IS PLOT3;
+

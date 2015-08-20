@@ -1,0 +1,7 @@
+*.dta
+data/*
+*.dat
+*.csv
+*.gh5
+*.Rds
+*.Rhistory

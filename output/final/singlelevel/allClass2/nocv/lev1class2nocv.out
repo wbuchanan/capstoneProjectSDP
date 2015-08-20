@@ -1,0 +1,590 @@
+Mplus VERSION 7.31 (Mac)
+MUTHEN & MUTHEN
+08/05/2015   2:31 AM
+
+INPUT INSTRUCTIONS
+
+  Title:
+  All Staff 2 Classes
+
+  DATA:
+   FILE IS ~/Desktop/sdpmplus/data/sdpCapstoneData.dat ;
+
+  VARIABLE:
+  NAMES ARE reqtime reportcl reportca repo1 repo2 repo3 repo4 repo5 repo6
+  repo7 repo8 repo9 repo10 repo11 repo12 repo13 function emailmer userid
+  date month hour minute second weekday julday weekyr elapses elapsem
+  elapseh dayorder ovorder daytotal ovtotal totdays report username func1
+  func2 func3 func4 func5 func6 func7 eseduc hseduc mseduc primkey schid ;
+
+  MISSING ARE .;
+
+  CLASSES = UGROUPS(2);
+
+  CATEGORICAL ARE repo1 repo2 repo3 repo4 repo5 repo6 repo7 repo8 repo9 repo10 repo11
+  repo12 repo13;
+
+  IDVARIABLE = primkey;
+
+  AUXILIARY ARE reqtime reportcl reportca function emailmer
+  date month hour minute second weekday julday weekyr elapses elapsem
+  elapseh dayorder ovorder daytotal ovtotal totdays report username func1
+  func2 func3 func4 func5 func6 func7 eseduc hseduc mseduc schid userid ;
+
+  USEVARIABLES ARE repo1 repo2 repo3 repo4 repo5 repo6 repo7 repo8 repo9 repo10 repo11
+  repo12 repo13;
+
+  ANALYSIS:
+  	TYPE = MIXTURE;
+  	PROCESSORS = 8;
+  	STSEED = 7779311;
+  	OPTSEED = 511508;
+  	
+  MODEL:
+  	%OVERALL%
+
+  SAVEDATA:
+  	FILE IS ~/Desktop/sdpmplus/output/final/singlelevel/allClass2/nocv/data.dat;
+  	SAVE IS CPROB;
+  	SAVE = LOGLIKELIHOOD;
+  	FORMAT IS FREE;
+
+  OUTPUT:
+  	TECH14;
+
+  PLOT:
+  	TYPE IS PLOT3;
+
+
+
+INPUT READING TERMINATED NORMALLY
+
+
+
+
+All Staff 2 Classes
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                       39925
+
+Number of dependent variables                                   13
+Number of independent variables                                  0
+Number of continuous latent variables                            0
+Number of categorical latent variables                           1
+
+Observed dependent variables
+
+  Binary and ordered categorical (ordinal)
+   REPO1       REPO2       REPO3       REPO4       REPO5       REPO6
+   REPO7       REPO8       REPO9       REPO10      REPO11      REPO12
+   REPO13
+
+Observed auxiliary variables
+   REQTIME     REPORTCL    REPORTCA    FUNCTION    EMAILMER    DATE
+   MONTH       HOUR        MINUTE      SECOND      WEEKDAY     JULDAY
+   WEEKYR      ELAPSES     ELAPSEM     ELAPSEH     DAYORDER    OVORDER
+   DAYTOTAL    OVTOTAL     TOTDAYS     REPORT      USERNAME    FUNC1
+   FUNC2       FUNC3       FUNC4       FUNC5       FUNC6       FUNC7
+   ESEDUC      HSEDUC      MSEDUC      SCHID       USERID
+
+Categorical latent variables
+   UGROUPS
+
+Variables with special functions
+
+  ID variable           PRIMKEY
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Optimization Specifications for the Quasi-Newton Algorithm for
+Continuous Outcomes
+  Maximum number of iterations                                 100
+  Convergence criterion                                  0.100D-05
+Optimization Specifications for the EM Algorithm
+  Maximum number of iterations                                 500
+  Convergence criteria
+    Loglikelihood change                                 0.100D-06
+    Relative loglikelihood change                        0.100D-06
+    Derivative                                           0.100D-05
+Optimization Specifications for the M step of the EM Algorithm for
+Categorical Latent variables
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-05
+  Basis for M step termination                           ITERATION
+Optimization Specifications for the M step of the EM Algorithm for
+Censored, Binary or Ordered Categorical (Ordinal), Unordered
+Categorical (Nominal) and Count Outcomes
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-05
+  Basis for M step termination                           ITERATION
+  Maximum value for logit thresholds                            15
+  Minimum value for logit thresholds                           -15
+  Minimum expected cell size for chi-square              0.100D-01
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+Random Starts Specifications
+  Random seed for analysis                                  511508
+Link                                                         LOGIT
+
+Input data file(s)
+  ~/Desktop/sdpmplus/data/sdpCapstoneData.dat
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns             1
+     Number of y missing data patterns           0
+     Number of u missing data patterns           1
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+UNIVARIATE PROPORTIONS AND COUNTS FOR CATEGORICAL VARIABLES
+
+    REPO1
+      Category 1    0.907        36199.000
+      Category 2    0.093         3726.000
+    REPO2
+      Category 1    0.958        38229.000
+      Category 2    0.042         1696.000
+    REPO3
+      Category 1    0.923        36857.000
+      Category 2    0.077         3068.000
+    REPO4
+      Category 1    0.759        30315.000
+      Category 2    0.241         9610.000
+    REPO5
+      Category 1    0.961        38376.000
+      Category 2    0.039         1549.000
+    REPO6
+      Category 1    0.998        39827.000
+      Category 2    0.002           98.000
+    REPO7
+      Category 1    0.999        39882.000
+      Category 2    0.001           43.000
+    REPO8
+      Category 1    0.949        37884.000
+      Category 2    0.051         2041.000
+    REPO9
+      Category 1    0.998        39853.000
+      Category 2    0.002           72.000
+    REPO10
+      Category 1    0.999        39868.000
+      Category 2    0.001           57.000
+    REPO11
+      Category 1    0.942        37628.000
+      Category 2    0.058         2297.000
+    REPO12
+      Category 1    0.996        39755.000
+      Category 2    0.004          170.000
+    REPO13
+      Category 1    0.709        28292.000
+      Category 2    0.291        11633.000
+
+
+     IN THE OPTIMIZATION, ONE OR MORE LOGIT THRESHOLDS APPROACHED AND WERE SET
+     AT THE EXTREME VALUES.  EXTREME VALUES ARE -15.000 AND 15.000.
+     THE FOLLOWING THRESHOLDS WERE SET AT THESE VALUES:
+     * THRESHOLD 1 OF CLASS INDICATOR REPO13 FOR CLASS 1 AT ITERATION 14
+     * THRESHOLD 1 OF CLASS INDICATOR REPO1 FOR CLASS 2 AT ITERATION 8
+     * THRESHOLD 1 OF CLASS INDICATOR REPO2 FOR CLASS 2 AT ITERATION 8
+     * THRESHOLD 1 OF CLASS INDICATOR REPO3 FOR CLASS 2 AT ITERATION 7
+     * THRESHOLD 1 OF CLASS INDICATOR REPO4 FOR CLASS 2 AT ITERATION 8
+     * THRESHOLD 1 OF CLASS INDICATOR REPO5 FOR CLASS 2 AT ITERATION 7
+     * THRESHOLD 1 OF CLASS INDICATOR REPO6 FOR CLASS 2 AT ITERATION 4
+     * THRESHOLD 1 OF CLASS INDICATOR REPO7 FOR CLASS 2 AT ITERATION 7
+     * THRESHOLD 1 OF CLASS INDICATOR REPO8 FOR CLASS 2 AT ITERATION 8
+     * THRESHOLD 1 OF CLASS INDICATOR REPO9 FOR CLASS 2 AT ITERATION 8
+     * THRESHOLD 1 OF CLASS INDICATOR REPO10 FOR CLASS 2 AT ITERATION 5
+     * THRESHOLD 1 OF CLASS INDICATOR REPO11 FOR CLASS 2 AT ITERATION 8
+     * THRESHOLD 1 OF CLASS INDICATOR REPO12 FOR CLASS 2 AT ITERATION 5
+     * THRESHOLD 1 OF CLASS INDICATOR REPO13 FOR CLASS 2 AT ITERATION 17
+
+
+
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       27
+
+Loglikelihood
+
+          H0 Value                      -93603.436
+          H0 Scaling Correction Factor      1.0000
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                  187260.872
+          Bayesian (BIC)                187492.931
+          Sample-Size Adjusted BIC      187407.125
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit for the Binary and Ordered Categorical
+(Ordinal) Outcomes
+
+          Pearson Chi-Square
+
+          Value                          25071.679
+          Degrees of Freedom                  8164
+          P-Value                           0.0000
+
+          Likelihood Ratio Chi-Square
+
+          Value                          28359.515
+          Degrees of Freedom                  8164
+          P-Value                           0.0000
+
+
+
+FINAL CLASS COUNTS AND PROPORTIONS FOR THE LATENT CLASSES
+BASED ON THE ESTIMATED MODEL
+
+    Latent
+   Classes
+
+       1      28292.00202          0.70863
+       2      11632.99798          0.29137
+
+
+FINAL CLASS COUNTS AND PROPORTIONS FOR THE LATENT CLASSES
+BASED ON ESTIMATED POSTERIOR PROBABILITIES
+
+    Latent
+   Classes
+
+       1      28292.00202          0.70863
+       2      11632.99798          0.29137
+
+
+FINAL CLASS COUNTS AND PROPORTIONS FOR THE LATENT CLASSES
+BASED ON THEIR MOST LIKELY LATENT CLASS MEMBERSHIP
+
+Class Counts and Proportions
+
+    Latent
+   Classes
+
+       1            28292          0.70863
+       2            11633          0.29137
+
+
+CLASSIFICATION QUALITY
+
+     Entropy                         1.000
+
+
+Average Latent Class Probabilities for Most Likely Latent Class Membership (Row)
+by Latent Class (Column)
+
+           1        2
+
+    1   1.000    0.000
+    2   0.000    1.000
+
+
+Classification Probabilities for the Most Likely Latent Class Membership (Column)
+by Latent Class (Row)
+
+           1        2
+
+    1   1.000    0.000
+    2   0.000    1.000
+
+
+Logits for the Classification Probabilities for the Most Likely Latent Class Membership (Column)
+by Latent Class (Row)
+
+              1        2
+
+    1     13.816    0.000
+    2    -13.816    0.000
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Latent Class 1
+
+ Thresholds
+    REPO1$1            1.886      0.018    107.277      0.000
+    REPO2$1            2.752      0.025    109.904      0.000
+    REPO3$1            2.107      0.019    110.184      0.000
+    REPO4$1            0.665      0.013     52.955      0.000
+    REPO5$1            2.849      0.026    109.003      0.000
+    REPO6$1            5.662      0.101     55.953      0.000
+    REPO7$1            6.488      0.153     42.510      0.000
+    REPO8$1            2.554      0.023    111.155      0.000
+    REPO9$1            5.971      0.118     50.602      0.000
+    REPO10$1           6.205      0.133     46.802      0.000
+    REPO11$1           2.426      0.022    111.465      0.000
+    REPO12$1           5.109      0.077     66.406      0.000
+    REPO13$1          15.000      0.000    999.000    999.000
+
+Latent Class 2
+
+ Thresholds
+    REPO1$1           15.000      0.000    999.000    999.000
+    REPO2$1           15.000      0.000    999.000    999.000
+    REPO3$1           15.000      0.000    999.000    999.000
+    REPO4$1           15.000      0.000    999.000    999.000
+    REPO5$1           15.000      0.000    999.000    999.000
+    REPO6$1           15.000      0.000    999.000    999.000
+    REPO7$1           15.000      0.000    999.000    999.000
+    REPO8$1           15.000      0.000    999.000    999.000
+    REPO9$1           15.000      0.000    999.000    999.000
+    REPO10$1          15.000      0.000    999.000    999.000
+    REPO11$1          15.000      0.000    999.000    999.000
+    REPO12$1          15.000      0.000    999.000    999.000
+    REPO13$1         -15.000      0.000    999.000    999.000
+
+Categorical Latent Variables
+
+ Means
+    UGROUPS#1          0.889      0.011     80.691      0.000
+
+
+RESULTS IN PROBABILITY SCALE
+
+Latent Class 1
+
+ REPO1
+    Category 1         0.868      0.002    431.895      0.000
+    Category 2         0.132      0.002     65.507      0.000
+ REPO2
+    Category 1         0.940      0.001    666.081      0.000
+    Category 2         0.060      0.001     42.475      0.000
+ REPO3
+    Category 1         0.892      0.002    482.293      0.000
+    Category 2         0.108      0.002     58.661      0.000
+ REPO4
+    Category 1         0.660      0.003    234.521      0.000
+    Category 2         0.340      0.003    120.637      0.000
+ REPO5
+    Category 1         0.945      0.001    698.894      0.000
+    Category 2         0.055      0.001     40.481      0.000
+ REPO6
+    Category 1         0.997      0.000   2852.970      0.000
+    Category 2         0.003      0.000      9.917      0.000
+ REPO7
+    Category 1         0.998      0.000   4311.210      0.000
+    Category 2         0.002      0.000      6.562      0.000
+ REPO8
+    Category 1         0.928      0.002    603.230      0.000
+    Category 2         0.072      0.002     46.901      0.000
+ REPO9
+    Category 1         0.997      0.000   3329.999      0.000
+    Category 2         0.003      0.000      8.496      0.000
+ REPO10
+    Category 1         0.998      0.000   3743.590      0.000
+    Category 2         0.002      0.000      7.557      0.000
+ REPO11
+    Category 1         0.919      0.002    565.843      0.000
+    Category 2         0.081      0.002     50.000      0.000
+ REPO12
+    Category 1         0.994      0.000   2163.368      0.000
+    Category 2         0.006      0.000     13.078      0.000
+ REPO13
+    Category 1         1.000      0.000      0.000      1.000
+    Category 2         0.000      0.000      0.000      1.000
+
+Latent Class 2
+
+ REPO1
+    Category 1         1.000      0.000      0.000      1.000
+    Category 2         0.000      0.000      0.000      1.000
+ REPO2
+    Category 1         1.000      0.000      0.000      1.000
+    Category 2         0.000      0.000      0.000      1.000
+ REPO3
+    Category 1         1.000      0.000      0.000      1.000
+    Category 2         0.000      0.000      0.000      1.000
+ REPO4
+    Category 1         1.000      0.000      0.000      1.000
+    Category 2         0.000      0.000      0.000      1.000
+ REPO5
+    Category 1         1.000      0.000      0.000      1.000
+    Category 2         0.000      0.000      0.000      1.000
+ REPO6
+    Category 1         1.000      0.000      0.000      1.000
+    Category 2         0.000      0.000      0.000      1.000
+ REPO7
+    Category 1         1.000      0.000      0.000      1.000
+    Category 2         0.000      0.000      0.000      1.000
+ REPO8
+    Category 1         1.000      0.000      0.000      1.000
+    Category 2         0.000      0.000      0.000      1.000
+ REPO9
+    Category 1         1.000      0.000      0.000      1.000
+    Category 2         0.000      0.000      0.000      1.000
+ REPO10
+    Category 1         1.000      0.000      0.000      1.000
+    Category 2         0.000      0.000      0.000      1.000
+ REPO11
+    Category 1         1.000      0.000      0.000      1.000
+    Category 2         0.000      0.000      0.000      1.000
+ REPO12
+    Category 1         1.000      0.000      0.000      1.000
+    Category 2         0.000      0.000      0.000      1.000
+ REPO13
+    Category 1         0.000      0.000      0.000      1.000
+    Category 2         1.000      0.000      0.000      1.000
+
+
+LATENT CLASS ODDS RATIO RESULTS
+
+Latent Class 1 Compared to Latent Class 2
+
+ REPO1
+    Category > 1   *********      0.000    999.000    999.000
+ REPO2
+    Category > 1   *********      0.000    999.000    999.000
+ REPO3
+    Category > 1   *********      0.000    999.000    999.000
+ REPO4
+    Category > 1   *********      0.000    999.000    999.000
+ REPO5
+    Category > 1   *********      0.000    999.000    999.000
+ REPO6
+    Category > 1   11362.836      0.000    999.000    999.000
+ REPO7
+    Category > 1    4976.023      0.000    999.000    999.000
+ REPO8
+    Category > 1   *********      0.000    999.000    999.000
+ REPO9
+    Category > 1    8340.514      0.000    999.000    999.000
+ REPO10
+    Category > 1    6599.400      0.000    999.000    999.000
+ REPO11
+    Category > 1   *********      0.000    999.000    999.000
+ REPO12
+    Category > 1   19761.502      0.000    999.000    999.000
+ REPO13
+    Category > 1       0.000      0.000    999.000    999.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.121E-03
+       (ratio of smallest to largest eigenvalue)
+
+
+TECHNICAL 14 OUTPUT
+
+     Random Starts Specifications for the k-1 Class Analysis Model
+        Number of initial stage random starts                  20
+        Number of final stage optimizations                     4
+
+     Random Starts Specification for the k-1 Class Model for Generated Data
+        Number of initial stage random starts                   0
+        Number of final stage optimizations for the
+           initial stage random starts                          0
+     Random Starts Specification for the k Class Model for Generated Data
+        Number of initial stage random starts                  40
+        Number of final stage optimizations                     8
+     Number of bootstrap draws requested                   Varies
+
+
+     PARAMETRIC BOOTSTRAPPED LIKELIHOOD RATIO TEST FOR 1 (H0) VERSUS 2 CLASSES
+
+          H0 Loglikelihood Value                      -102819.044
+          2 Times the Loglikelihood Difference          18431.215
+          Difference in the Number of Parameters               14
+          Approximate P-Value                              0.0000
+          Successful Bootstrap Draws                            5
+
+     WARNING:  OF THE 5 BOOTSTRAP DRAWS, 3 DRAWS HAD BOTH A SMALLER LRT VALUE THAN THE
+     OBSERVED LRT VALUE AND NOT A REPLICATED BEST LOGLIKELIHOOD VALUE FOR THE 2-CLASS MODEL.
+     THIS MEANS THAT THE P-VALUE MAY NOT BE TRUSTWORTHY DUE TO LOCAL MAXIMA.
+     INCREASE THE NUMBER OF RANDOM STARTS USING THE LRTSTARTS OPTION.
+
+
+
+PLOT INFORMATION
+
+The following plots are available:
+
+  Histograms (sample values, outliers)
+  Scatterplots (sample values, outliers)
+  Sample proportions and estimated probabilities
+
+SAVEDATA INFORMATION
+
+
+  Save file
+    ~/Desktop/sdpmplus/output/final/singlelevel/allClass2/nocv/data.dat
+
+  Order of variables
+
+    REPO1
+    REPO2
+    REPO3
+    REPO4
+    REPO5
+    REPO6
+    REPO7
+    REPO8
+    REPO9
+    REPO10
+    REPO11
+    REPO12
+    REPO13
+    PRIMKEY
+    REQTIME
+    REPORTCL
+    REPORTCA
+    FUNCTION
+    EMAILMER
+    DATE
+    MONTH
+    HOUR
+    MINUTE
+    SECOND
+    WEEKDAY
+    JULDAY
+    WEEKYR
+    ELAPSES
+    ELAPSEM
+    ELAPSEH
+    DAYORDER
+    OVORDER
+    DAYTOTAL
+    OVTOTAL
+    TOTDAYS
+    REPORT
+    USERNAME
+    FUNC1
+    FUNC2
+    FUNC3
+    FUNC4
+    FUNC5
+    FUNC6
+    FUNC7
+    ESEDUC
+    HSEDUC
+    MSEDUC
+    SCHID
+    USERID
+    OUTLOGL
+    CPROB1
+    CPROB2
+    UGROUPS
+
+  Save file format           Free
+
+  Save file record length    10000
+

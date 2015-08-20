@@ -1,0 +1,156 @@
+Mplus VERSION 7.31 (Mac)
+MUTHEN & MUTHEN
+08/05/2015   2:34 AM
+
+INPUT INSTRUCTIONS
+
+  Title:
+  All Staff 2 Levels 4 Classes w/Covariates
+
+  DATA:
+   FILE IS ~/Desktop/sdpmplus/data/sdpCapstoneData.dat ;
+
+  VARIABLE:
+  NAMES ARE reqtime reportcl reportca repo1 repo2 repo3 repo4 repo5 repo6
+  repo7 repo8 repo9 repo10 repo11 repo12 repo13 function emailmer userid
+  date month hour minute second weekday julday weekyr elapses elapsem
+  elapseh dayorder ovorder daytotal ovtotal totdays report username func1
+  func2 func3 func4 func5 func6 func7 eseduc hseduc mseduc primkey schid ;
+
+  MISSING ARE .;
+
+  CLASSES = UGROUPS(5) SESSION(4);
+
+  CATEGORICAL ARE repo1 repo2 repo3 repo4 repo5 repo6 repo7 repo8 repo9 repo10 repo11
+  repo12 repo13;
+
+  WITHIN ARE repo1 repo2 repo3 repo4 repo5 repo6 repo7 repo8 repo9 repo10
+  repo11 repo12 repo13 SESSION;
+
+  BETWEEN ARE UGROUPS eseduc mseduc hseduc func4 func6 totdays;
+
+  CLUSTER IS userid ;
+
+  IDVARIABLE = primkey;
+
+  AUXILIARY ARE reqtime reportcl reportca function emailmer
+  date month hour minute second weekday julday weekyr elapses elapsem
+  elapseh dayorder ovorder daytotal ovtotal report username func1
+  func2 func3 func5 func7 schid ;
+
+  USEVARIABLES ARE repo1 repo2 repo3 repo4 repo5 repo6 repo7 repo8 repo9 repo10 repo11
+  repo12 repo13 totdays eseduc hseduc mseduc func4 func6;
+
+  DEFINE:
+  	STANDARDIZE totdays;
+
+  ANALYSIS:
+  	TYPE = TWOLEVEL MIXTURE;
+  	STARTS = 100 25;
+  	PROCESS=8(STARTS);
+  	PROCESSORS = 8;
+  	MIXC = CONV;
+  	MIXU = CONV;
+  	STSCALE = 1;
+  	STSEED = 7779311;
+  	UCELLSIZE = 0;
+
+  MODEL:
+       %WITHIN%
+       %OVERALL%
+       [ session#1@-0.87131 ];
+       [ session#2@2.55994 ];
+       [ session#3@0.55598 ];
+
+       %BETWEEN%
+       %OVERALL%
+  	UGROUPS ON totdays eseduc hseduc mseduc func4 func6;
+       session#1 ON ugroups#1@-2.42255;
+       session#1 ON ugroups#2@1.24917;
+       session#1 ON ugroups#3@-2.16973;
+       session#1 ON ugroups#4@-3.35566;
+       session#2 ON ugroups#1@-1.89382;
+       session#2 ON ugroups#2@-2.69919;
+       session#2 ON ugroups#3@-3.47596;
+       session#2 ON ugroups#4@-4.04425;
+       session#3 ON ugroups#1@0.23147;
+       session#3 ON ugroups#2@-0.18943;
+       session#3 ON ugroups#3@1.18968;
+       session#3 ON ugroups#4@-1.72188;
+       [ ugroups#1@1.26588 ];
+       [ ugroups#2@-0.26655 ];
+       [ ugroups#3@2.91463 ];
+       [ ugroups#4@0.78386 ];
+
+    MODEL SESSION:
+       %WITHIN%
+       %SESSION#1%
+       [ repo1$1@15 ] (1);
+       [ repo2$1@-15 ] (2);
+       [ repo3$1@15 ] (3);
+       [ repo4$1@15 ] (4);
+       [ repo5$1@15 ] (5);
+       [ repo6$1@15 ] (6);
+       [ repo7$1@15 ] (7);
+       [ repo8$1@15 ] (8);
+       [ repo9$1@15 ] (9);
+       [ repo10$1@15 ] (10);
+       [ repo11$1@15 ] (11);
+       [ repo12$1@15 ] (12);
+       [ repo13$1@15 ] (13);
+
+       %SESSION#2%
+       [ repo1$1@15 ] (14);
+       [ repo2$1@15 ] (15);
+       [ repo3$1@15 ] (16);
+       [ repo4$1@15 ] (17);
+       [ repo5$1@15 ] (18);
+       [ repo6$1@15 ] (19);
+       [ repo7$1@15 ] (20);
+       [ repo8$1@15 ] (21);
+       [ repo9$1@15 ] (22);
+       [ repo10$1@15 ] (23);
+       [ repo11$1@15 ] (24);
+       [ repo12$1@15 ] (25);
+       [ repo13$1@-15 ] (26);
+
+       %SESSION#3%
+       [ repo1$1@1.26942 ] (27);
+       [ repo2$1@15 ] (28);
+       [ repo3$1@1.51216 ] (29);
+       [ repo4$1@15 ] (30);
+       [ repo5$1@2.29916 ] (31);
+       [ repo6$1@5.14939 ] (32);
+       [ repo7$1@5.97641 ] (33);
+       [ repo8$1@1.99094 ] (34);
+       [ repo9$1@5.45923 ] (35);
+       [ repo10$1@5.69373 ] (36);
+       [ repo11$1@1.85550 ] (37);
+       [ repo12$1@4.59429 ] (38);
+       [ repo13$1@15 ] (39);
+
+       %SESSION#4%
+       [ repo1$1@15 ] (40);
+       [ repo2$1@15 ] (41);
+       [ repo3$1@15 ] (42);
+       [ repo4$1@-15 ] (43);
+       [ repo5$1@15 ] (44);
+       [ repo6$1@15 ] (45);
+       [ repo7$1@15 ] (46);
+       [ repo8$1@15 ] (47);
+       [ repo9$1@15 ] (48);
+       [ repo10$1@15 ] (49);
+       [ repo11$1@15 ] (50);
+       [ repo12$1@15 ] (51);
+       [ repo13$1@15 ] (52);
+
+  SAVEDATA:
+  	FILE IS ~/Desktop/sdpmplus/output/final/twolevel/allClass4/cv/data.dat;
+  	SAVE IS CPROB;
+  	SAVE = LOGLIKELIHOOD;
+  	FORMAT IS FREE;
+
+  PLOT:
+  	TYPE IS PLOT3;
+
+

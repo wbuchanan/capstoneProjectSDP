@@ -1,0 +1,41 @@
+------Begin Mplus Model Run: 05Aug2015 02:30:42------
+Target directory: ~/Desktop/sdpmplus/output/final
+Run options:
+	Recursive (run models in subdirectories): TRUE
+	Show output on console: FALSE
+	Replace existing outfile: always
+------
+Currently running model: lev1class2wcv.inp
+Currently running model: lev1class2nocv.inp
+Currently running model: lev1class3wcv.inp
+Currently running model: lev1class3nocv.inp
+Currently running model: lev1class4wcv.inp
+Currently running model: lev1class4nocv.inp
+Currently running model: lev1class5wcv.inp
+Currently running model: lev1class5nocv.inp
+Currently running model: lev1class2wcv.inp
+Currently running model: lev1class2nocv.inp
+Currently running model: lev1class3wcv.inp
+Currently running model: lev1class3nocv.inp
+Currently running model: lev1class4wcv.inp
+Currently running model: lev1class4nocv.inp
+Currently running model: lev1class5wcv.inp
+Currently running model: lev1class5nocv.inp
+Currently running model: lev2class2wcv.inp
+Currently running model: lev2class2nocv.inp
+Currently running model: lev2class3wcv.inp
+Currently running model: lev2class3nocv.inp
+Currently running model: lev2class4wcv.inp
+Currently running model: lev2class4nocv.inp
+Currently running model: lev2class5wcv.inp
+Currently running model: lev2class5nocv.inp
+Currently running model: lev2class2wcv.inp
+Currently running model: lev2class2nocv.inp
+Currently running model: lev2class3wcv.inp
+Currently running model: lev2class3nocv.inp
+Currently running model: lev2class4wcv.inp
+Currently running model: lev2class4nocv.inp
+Currently running model: lev2class5wcv.inp
+Currently running model: lev2class5nocv.inp
+
+------End Mplus Model Run: 05Aug2015 02:35:28------

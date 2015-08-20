@@ -1,0 +1,138 @@
+Title:
+All Staff 5 Classes w/Covariates
+
+DATA:
+ FILE IS ~/Desktop/sdpmplus/data/sdpCapstoneData.dat ;
+
+VARIABLE:
+NAMES ARE reqtime reportcl reportca repo1 repo2 repo3 repo4 repo5 repo6 
+repo7 repo8 repo9 repo10 repo11 repo12 repo13 function emailmer userid 
+date month hour minute second weekday julday weekyr elapses elapsem 
+elapseh dayorder ovorder daytotal ovtotal totdays report username func1 
+func2 func3 func4 func5 func6 func7 eseduc hseduc mseduc primkey schid ; 
+
+MISSING ARE .;
+
+CLASSES = UGROUPS(5);
+
+CATEGORICAL ARE repo1 repo2 repo3 repo4 repo5 repo6 repo7 repo8 repo9 repo10 repo11 
+repo12 repo13;
+
+IDVARIABLE = primkey;
+
+AUXILIARY ARE reqtime reportcl reportca function emailmer userid
+date month hour minute second weekday julday weekyr elapses elapsem 
+elapseh dayorder ovorder daytotal ovtotal report username func1 
+func2 func3 func4 func6 func7 schid ;
+
+USEVARIABLES ARE repo1 repo2 repo3 repo4 repo5 repo6 repo7 repo8 repo9 repo10 repo11 
+repo12 repo13 totdays eseduc hseduc mseduc func5;
+
+ANALYSIS:
+	TYPE = MIXTURE;
+	STARTS = 200 50;
+	PROCESSORS = 8;
+	MIXC = CONV;
+	MIXU = CONV;
+	STSEED = 7779311;
+
+MODEL:
+	%OVERALL%
+	UGROUPS ON totdays eseduc hseduc mseduc func5;
+    [ ugroups#1*-1.13851 ];
+     [ ugroups#2*-0.19104 ];
+     [ ugroups#3*-1.33282 ];
+     [ ugroups#4*0.02168 ];
+
+     %UGROUPS#1%
+
+     [ repo1$1*-15 ];
+     [ repo2$1*15 ];
+     [ repo3$1*15 ];
+     [ repo4$1*15 ];
+     [ repo5$1*15 ];
+     [ repo6$1*15 ];
+     [ repo7$1*15 ];
+     [ repo8$1*15 ];
+     [ repo9$1*15 ];
+     [ repo10$1*15 ];
+     [ repo11$1*15 ];
+     [ repo12$1*15 ];
+     [ repo13$1*15 ];
+
+     %UGROUPS#2%
+
+     [ repo1$1*15 ];
+     [ repo2$1*15 ];
+     [ repo3$1*15 ];
+     [ repo4$1*-15 ];
+     [ repo5$1*15 ];
+     [ repo6$1*15 ];
+     [ repo7$1*15 ];
+     [ repo8$1*15 ];
+     [ repo9$1*15 ];
+     [ repo10$1*15 ];
+     [ repo11$1*15 ];
+     [ repo12$1*15 ];
+     [ repo13$1*15 ];
+
+     %UGROUPS#3%
+
+     [ repo1$1*15 ];
+     [ repo2$1*15 ];
+     [ repo3$1*-15 ];
+     [ repo4$1*15 ];
+     [ repo5$1*15 ];
+     [ repo6$1*15 ];
+     [ repo7$1*15 ];
+     [ repo8$1*15 ];
+     [ repo9$1*15 ];
+     [ repo10$1*15 ];
+     [ repo11$1*15 ];
+     [ repo12$1*15 ];
+     [ repo13$1*15 ];
+
+     %UGROUPS#4%
+
+     [ repo1$1*15 ];
+     [ repo2$1*1.79333 ];
+     [ repo3$1*15 ];
+     [ repo4$1*15 ];
+     [ repo5$1*1.89831 ];
+     [ repo6$1*4.79004 ];
+     [ repo7$1*5.61846 ];
+     [ repo8$1*1.57373 ];
+     [ repo9$1*5.10054 ];
+     [ repo10$1*5.33543 ];
+     [ repo11$1*1.42922 ];
+     [ repo12$1*4.23308 ];
+     [ repo13$1*15 ];
+
+     %UGROUPS#5%
+
+     [ repo1$1*15 ];
+     [ repo2$1*15 ];
+     [ repo3$1*15 ];
+     [ repo4$1*15 ];
+     [ repo5$1*15 ];
+     [ repo6$1*15 ];
+     [ repo7$1*15 ];
+     [ repo8$1*15 ];
+     [ repo9$1*15 ];
+     [ repo10$1*15 ];
+     [ repo11$1*15 ];
+     [ repo12$1*15 ];
+     [ repo13$1*-15 ];
+     
+SAVEDATA: 
+	FILE IS ~/Desktop/sdpmplus/output/final/singlelevel/allClass5/cv/data.dat;
+	SAVE IS CPROB; 
+	SAVE = LOGLIKELIHOOD;
+	FORMAT IS FREE;
+
+OUTPUT:
+	TECH14;
+
+PLOT:
+	TYPE IS PLOT3;
+
